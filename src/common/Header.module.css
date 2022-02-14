@@ -1,0 +1,9 @@
+.toolbar {
+    background-color: #133A1B;
+    min-height: 75px;
+}
+
+.heading {
+    flex-grow: 1; 
+    text-align: center;
+}

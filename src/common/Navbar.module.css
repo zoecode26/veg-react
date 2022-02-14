@@ -1,0 +1,25 @@
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+
+.link:hover {
+    color: #011B10;
+    border-bottom: 1px solid #011B10;
+}
+
+.navbar {
+    background-color: #B7BF96;
+    min-height: 35px !important;
+}
+
+.navlinks {
+    display: flex;
+    justify-content: space-around;
+    flex-grow: 1;
+    text-align: center;
+    margin: 0px 20px;
+}
+
+

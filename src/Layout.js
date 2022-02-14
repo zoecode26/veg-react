@@ -1,6 +1,6 @@
-import { Outlet, Link } from "react-router-dom";
-import Header from "./Header";
-import Navbar from "./Navbar";
+import { Outlet} from "react-router-dom";
+import Header from "./common/Header";
+import Navbar from "./common/Navbar";
 
 export default function Layout() {
   return (
