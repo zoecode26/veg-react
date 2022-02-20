@@ -1,0 +1,25 @@
+.img {
+    width: 100%;
+    height: auto;
+}
+
+.card {
+    max-width: 320px;
+    margin: 0 auto;
+    padding: 2% 0;
+}
+
+.outerBorder {
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+@media only screen and (max-width: 900px) {
+    .item {
+        margin: 0 auto !important;
+    }
+
+    .card {
+        padding: 5%; 
+    }
+}

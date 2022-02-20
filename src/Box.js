@@ -1,22 +1,22 @@
 import React, { Component } from "react";
- 
-class Boxes extends Component {
+import styles from './Box.module.css';
+import { Grid } from '@mui/material';
+
+class Box extends Component {
   render() {
     return (
-      <div>
-        <h2>STUFF</h2>
-        <p>Mauris sem velit, vehicula eget sodales vitae,
-        rhoncus eget sapien:</p>
-        <ol>
-          <li>Nulla pulvinar diam</li>
-          <li>Facilisis bibendum</li>
-          <li>Vestibulum vulputate</li>
-          <li>Eget erat</li>
-          <li>Id porttitor</li>
-        </ol>
-      </div>
+      <Grid item className={styles.item} xs={3} sm={4} md={4}>
+        <div className = {styles.outerBorder}>
+          <div className = {styles.card}>
+            <h2>{this.props.boxName}</h2>
+            <img className={styles.img} src={this.props.imagePath} alt={this.props.alt}/>
+            <h2>£{this.props.price}.00</h2>
+            <h4>{this.props.description}</h4>
+          </div>
+        </div>
+      </Grid>
     );
   }
 }
  
-export default Boxes;
+export default Box;
