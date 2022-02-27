@@ -24,6 +24,7 @@ class Boxes extends Component {
     if (this.state.loaded) {
       boxes = this.state.boxes.map(box => {
         return <Box 
+          id={box.id}
           boxName={box.boxName}
           price={box.price}
           description={box.boxDescription}

@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    border-bottom: 1px #d7d7d7 solid;
+    justify-content: center;
+}
+
+.img {
+    width: 50px;
+    margin: 10px 25px 10px 0;
+}
+
+h3 {
+    padding-top: 10px !important;
+    color: gray;
+}
+

@@ -1,0 +1,37 @@
+.img {
+    width:60%;
+}
+
+.imgContainer {
+    text-align: right;
+}
+
+.info {
+    width: 60%;
+}
+
+@media only screen and (max-width: 900px) {
+    .info {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .imgContainer {
+        text-align: left;
+    }
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+}
+
+.page {
+    width: 80%;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+}

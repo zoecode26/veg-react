@@ -5,6 +5,7 @@ import Home from "./Home";
 import Boxes from "./Boxes";
 import Contact from "./Contact";
 import Layout from "./Layout";
+import BoxData from "./BoxData/BoxData";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route exact path="/" element={<Home />} />
           <Route path="boxes" element={<Boxes />} />
+          <Route path={"boxes/:id"} element={<BoxData />} />
           <Route path="contact" element={<Contact />} />
         </Route>
       </Routes>
