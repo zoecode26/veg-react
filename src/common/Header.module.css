@@ -1,9 +1,28 @@
 .toolbar {
     background-color: #133A1B;
     min-height: 75px;
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.firstIcon {
+    visibility: hidden;
 }
 
 .heading {
-    flex-grow: 1; 
-    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.secondIcon {
+    min-height: 80px;
+    display: flex;
+    align-items: center;
 }

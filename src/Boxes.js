@@ -35,6 +35,7 @@ class Boxes extends Component {
     }
     return(
       <Aux>
+        <div className={styles.outerPage}>
           <div className = {styles.page}>
             <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 8, lg: 12, xl: 16}}>
               <Grid item className={styles.item} xs={3} sm={4} md={4}>
@@ -45,6 +46,7 @@ class Boxes extends Component {
               {boxes}
             </Grid>
           </div>
+        </div>
       </Aux>
     )
   }

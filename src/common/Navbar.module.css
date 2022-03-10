@@ -12,6 +12,8 @@
 .navbar {
     background-color: #B7BF96;
     min-height: 35px !important;
+    display: flex;
+    justify-content: center;
 }
 
 .navlinks {
@@ -19,7 +21,15 @@
     justify-content: space-around;
     flex-grow: 1;
     text-align: center;
-    margin: 0px 20px;
 }
 
+.container {
+    width: 80%;
+}
+
+@media only screen and (max-width: 900px) {
+    .container {
+        width: 80%;
+    }
+}
 

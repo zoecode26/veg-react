@@ -12,16 +12,18 @@ export default function Navbar() {
     <AppBar position="static">
       <CssBaseline />
       <Toolbar className={styles.navbar}>
-          <div className={styles.navlinks}>
-            <Link to="/" className={styles.link}>
-            Home
-            </Link>
-            <Link to="/boxes" className={styles.link}>
-            Veg Boxes
-            </Link>
-            <Link to="/contact" className={styles.link}>
-            Contact
-            </Link>
+          <div className={styles.container}>
+            <div className={styles.navlinks}>
+              <Link to="/" className={styles.link}>
+                Home
+              </Link>
+              <Link to="/boxes" className={styles.link}>
+                Veg Boxes
+              </Link>
+              <Link to="/contact" className={styles.link}>
+                Contact
+              </Link>
+            </div>
           </div>
       </Toolbar>
     </AppBar>

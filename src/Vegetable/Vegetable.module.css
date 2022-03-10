@@ -1,7 +1,6 @@
 .container {
     display: flex;
     border-bottom: 1px #d7d7d7 solid;
-    justify-content: center;
 }
 
 .img {
@@ -12,5 +11,9 @@
 h3 {
     padding-top: 10px !important;
     color: gray;
+}
+
+.item {
+    padding-top: 0% !important;
 }
 

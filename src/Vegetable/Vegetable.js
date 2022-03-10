@@ -21,7 +21,7 @@ class Vegetable extends Component {
     render() {
         if (this.state.loaded) {
             return (
-                <Grid item className={styles.item} xs={3} sm={4} md={4}>
+                <Grid item className={styles.item} xs={6}>
                     <div className = {styles.container}>
                         <img className={styles.img} src={this.state.vegetable.iconPath} alt={this.state.vegetable.alt}/>
                         <h3>{this.state.vegetable.vegetableName}</h3>

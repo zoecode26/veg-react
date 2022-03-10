@@ -1,0 +1,12 @@
+.button {
+    background-color: #133A1B !important;
+    height: 40px !important;
+    width: 45%;
+    font-size: 11px !important;
+}
+
+.button:hover {
+    text-decoration: underline;
+    background-color: #133A1B;
+}
+

@@ -32,13 +32,11 @@ class BoxPage extends Component {
         />
       })
       return (
-        <div className = {styles.content}>
-          <div className = {styles.page}>
-            <Grid padding="2%" justifyContent="center" container spacing={{ xs: 2, md: 6 }} columns={{ xs: 4, md: 8, lg: 12, xl: 16}}>
-              <Grid item xs={6}>  
-                <div className = {styles.imgContainer}>
-                  <img className = {styles.img} src={this.state.box.imagePath} alt={this.props.alt}/>
-                </div>
+        <div className={styles.center}>
+          <div className = {styles.content}>
+            <Grid padding="2%" container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 8, lg: 12, xl: 16}} className={styles.topGrid, styles.center}>
+              <Grid item xs={6}className={styles.verticalCenter}>
+                <img className = {styles.img} src={this.state.box.imagePath} alt={this.props.alt}/>
               </Grid>
               <Grid item xs={6}>
                 <div className = {styles.info}>
@@ -48,8 +46,9 @@ class BoxPage extends Component {
                   <AddToCart />
                 </div>
               </Grid>
-            </Grid>
-            <Grid padding="2%" justifyContent="center" container spacing={{ xs: 2, md: 6 }} columns={{ xs: 8}} className={styles.grid}>
+              <Grid item xs={12} md={6} lg={12} className = {styles.boxContents}>
+                <h2> What's in the Box: </h2>
+              </Grid>
               {contents}
             </Grid>
           </div>
