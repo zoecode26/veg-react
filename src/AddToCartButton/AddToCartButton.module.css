@@ -10,3 +10,11 @@
     background-color: #133A1B;
 }
 
+.disabledButton {
+    background-color: lightgray !important;
+    color: gray !important;
+    height: 40px !important;
+    width: 45%;
+    font-size: 11px !important;
+}
+

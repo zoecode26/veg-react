@@ -43,7 +43,7 @@ class BoxPage extends Component {
                   <h1>{this.state.box.boxName}</h1>
                   <h2>£{this.state.box.price}.00</h2>
                   <h4>{this.state.box.boxDescription}</h4>
-                  <AddToCart />
+                  <AddToCart boxId={this.props.id}/>
                 </div>
               </Grid>
               <Grid item xs={12} md={6} lg={12} className = {styles.boxContents}>

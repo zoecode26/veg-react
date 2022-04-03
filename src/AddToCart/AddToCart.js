@@ -1,3 +1,4 @@
+import { ThreeSixty } from "@material-ui/icons";
 import React, { Component } from "react";
 import AddToCartButton from "../AddToCartButton/AddToCartButton";
 import QuantitySelector from "../QuantitySelector/QuantitySelector";
@@ -8,7 +9,7 @@ class AddToCart extends Component {
     return (
         <div className = {styles.container}>
             <QuantitySelector />
-            <AddToCartButton />
+            <AddToCartButton boxId={this.props.boxId}/>
         </div>
     );
   }

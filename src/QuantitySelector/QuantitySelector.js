@@ -4,7 +4,9 @@ import styles from './QuantitySelector.module.css';
 
 class QuantitySelector extends Component { 
     render() {
-        const handleChange = (event) => {};
+        const handleChange = (event) => {
+            sessionStorage.setItem("quantity", event.target.value);
+        };
         return (
             <FormControl size="small" className={styles.dropdown} renderValue={"hello"}>
                 <InputLabel id="demo-simple-select-label"> Quantity</InputLabel>
