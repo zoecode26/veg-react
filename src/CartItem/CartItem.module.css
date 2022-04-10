@@ -30,3 +30,7 @@ h2 {
 .textField {
     max-width: 50px !important;
 } 
+
+.dropdown {
+    width: 30%;
+}

@@ -34,7 +34,7 @@ class BoxPage extends Component {
       return (
         <div className={styles.center}>
           <div className = {styles.content}>
-            <Grid padding="2%" container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 8, lg: 12, xl: 16}} className={styles.topGrid, styles.center}>
+            <Grid padding="2%" container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, md: 8, lg: 12, xl: 16}} className={styles.center}>
               <Grid item xs={6}className={styles.verticalCenter}>
                 <img className = {styles.img} src={this.state.box.imagePath} alt={this.props.alt}/>
               </Grid>
