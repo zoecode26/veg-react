@@ -1,0 +1,15 @@
+.item {
+    display: flex;
+    justify-content: end;
+    padding-right: 2%;
+}
+
+.cartPage {
+    padding: 2%;
+}
+
+.totalContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}

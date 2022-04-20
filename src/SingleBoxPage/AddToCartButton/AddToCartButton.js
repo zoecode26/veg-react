@@ -12,10 +12,10 @@ class AddToCartButton extends Component {
     async componentDidMount() {
         var enabled = sessionStorage.getItem(this.props.boxId) != 5
         this.setState({
-          enabled: enabled,
-          loaded: true
+            enabled: enabled,
+            loaded: true
         });
-      }
+    }
     
     addToSession = () => {
         var boxId = this.props.boxId

@@ -1,12 +1,12 @@
 import { Outlet} from "react-router-dom";
 import Header from "./common/Header";
-import Navbar from "./common/Navbar";
+import Baseline from "./common/Baseline";
 
 export default function Layout() {
   return (
     <>
       <Header />
-      <Navbar />
+      <Baseline />
       <Outlet />
     </>
   )

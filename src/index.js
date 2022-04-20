@@ -1,23 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Home";
-import Boxes from "./Boxes";
-import Contact from "./Contact";
+import Boxes from "./MultiBoxPage/Boxes";
 import Layout from "./Layout";
-import BoxData from "./BoxData/BoxData";
-import Cart from "./Cart/Cart";
+import BoxData from "./SingleBoxPage/BoxData/BoxData";
+import Cart from "./Cart/CartPage/CartPage";
+import LoginPage from "./LoginPage/LoginPage";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route exact path="/" element={<Home />} />
-          <Route path="boxes" element={<Boxes />} />
+          <Route exact path="/" element={<Boxes />} />
           <Route path={"boxes/:id"} element={<BoxData />} />
-          <Route path="contact" element={<Contact />} />
           <Route path={"cart"} element={<Cart />} />
+          <Route path={"login"} element={<LoginPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

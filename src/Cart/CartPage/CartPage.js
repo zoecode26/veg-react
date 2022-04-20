@@ -3,7 +3,10 @@ import CartItem from "../CartItem/CartItem";
 import NoItems from "../NoItems/NoItems";
 import CartHeader from "../CartHeader/CartHeader";
 import { Grid } from "@material-ui/core";
-import styles from './Cart.module.css';
+import styles from './CartPage.module.css';
+import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import CheckoutButton from "../CheckoutButton/CheckoutButton";
  
 class Cart extends Component {
   state = {
@@ -60,10 +63,11 @@ class Cart extends Component {
               alignItems="center"
               justifyContent="center">
 
-              <Grid item xs={12} lg={8}>
+              <Grid item xs={12} lg={8} className={styles.totalContainer}>
                 <div className={styles.item}>
                   <h2> Total: £{this.state.total}.00</h2> 
                 </div>
+                <CheckoutButton />
               </Grid>
             </Grid>
           </div>

@@ -1,0 +1,51 @@
+.buttonText {
+    text-decoration: none !important;
+    color: white;
+}
+
+.button {
+    background-color: #133A1B !important;
+    height: 40px !important;
+    width: 150px;
+    font-size: 15px !important;
+}
+
+.button:hover {
+    text-decoration: underline;
+    background-color: #133A1B;
+}
+
+.linkText {
+    color: #133A1B;
+}
+
+.item {
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 5%;
+    margin-top: 20%;
+}
+
+.textField {
+    width: 50%;
+}
+
+.buttonContainer {
+    padding-top: 3%;
+    display:flex;
+    justify-content: center;
+}
+
+.textFieldContainer {
+    padding: 1%;
+    display:flex;
+    justify-content: center;
+}
+
+.centerContent {
+    display:flex;
+    justify-content: center;
+    padding: 2%;
+}
+
+

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Box from "./Box";
+import Box from "../SingleBoxPage/Box/Box";
 import Aux from 'react-aux';
 import styles from './Boxes.module.css';
 import { Grid } from '@mui/material';
