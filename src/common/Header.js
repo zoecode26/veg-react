@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import styles from './Header.module.css';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Link } from "react-router-dom";
-import { CssBaseline } from "@mui/material";
   
 export default function Header() {
   return (
@@ -15,7 +14,9 @@ export default function Header() {
         <div className={styles.container}>
             <ShoppingCartIcon className={styles.firstIcon}/>
             <Typography variant="h4" className = {styles.heading}>
-              VeggieBox
+              <Link to={"/"} style={{ textDecoration: 'none', color: 'white' }}> 
+                VeggieBox
+              </Link>
             </Typography>
             <Link to={"/cart/"} style={{ textDecoration: 'none', color: 'white' }}>
               <ShoppingCartIcon fontSize="large" className={styles.secondIcon}/>

@@ -7,12 +7,14 @@ import styles from './CartPage.module.css';
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import CheckoutButton from "../CheckoutButton/CheckoutButton";
- 
+import axios from "axios"; 
+
 class Cart extends Component {
   state = {
     cartItems: null,
     loaded: false,
     total: null,
+    loggedIn: false,
   }
 
   handleTotalUpdate = (newTotal) => {
@@ -21,6 +23,12 @@ class Cart extends Component {
   } 
 
   async componentDidMount() {
+
+    const testDetails = { test: "Test" };
+    axios.post('http://localhost:8080/authstatus', testDetails , { withCredentials: true })
+            .then(response => this.setState({loggedIn: true}))
+            .catch(error => this.setState({loggedIn: false})); 
+
     var cartItems = []
     var total = 0
     for(let key in sessionStorage) {
@@ -67,7 +75,7 @@ class Cart extends Component {
                 <div className={styles.item}>
                   <h2> Total: £{this.state.total}.00</h2> 
                 </div>
-                <CheckoutButton />
+                <CheckoutButton loggedIn={this.state.loggedIn}/>
               </Grid>
             </Grid>
           </div>

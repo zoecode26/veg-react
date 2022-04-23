@@ -3,6 +3,7 @@ import Box from "../SingleBoxPage/Box/Box";
 import Aux from 'react-aux';
 import styles from './Boxes.module.css';
 import { Grid } from '@mui/material';
+import axios from "axios";
  
 class Boxes extends Component {
   state = {
@@ -22,6 +23,7 @@ class Boxes extends Component {
   render() {
     let boxes = null
     if (this.state.loaded) {
+      console.log(typeof this.state.boxes)
       boxes = this.state.boxes.map(box => {
         return <Box 
           id={box.id}

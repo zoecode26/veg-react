@@ -11,10 +11,9 @@ class CheckoutButton extends Component {
     }
 
     async componentDidMount() {
-        let user = Cookies.get("jwt-token");
-        let path = "/login"
+        let path = "/login?retUrl=payment"
 
-        if (user != undefined) {
+        if (this.props.loggedIn) {
             path = "/boxes/1"
         }
 

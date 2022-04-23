@@ -6,6 +6,8 @@ import Layout from "./Layout";
 import BoxData from "./SingleBoxPage/BoxData/BoxData";
 import Cart from "./Cart/CartPage/CartPage";
 import LoginPage from "./LoginPage/LoginPage";
+import SignupPage from "./SignupPage/SignupPage";
+import Payment from "./Payment/Payment";
 
 export default function App() {
   return (
@@ -16,6 +18,8 @@ export default function App() {
           <Route path={"boxes/:id"} element={<BoxData />} />
           <Route path={"cart"} element={<Cart />} />
           <Route path={"login"} element={<LoginPage />} />
+          <Route path={"signup"} element={<SignupPage />} />
+          <Route path={"payment"} element={<Payment />} />
         </Route>
       </Routes>
     </BrowserRouter>

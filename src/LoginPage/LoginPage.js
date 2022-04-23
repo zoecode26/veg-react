@@ -14,11 +14,15 @@ class LoginPage extends Component {
     }
 
     verifyLogin = () => {
-        console.log(this.state.email)
-        console.log(this.state.password)
         const loginDetails = { email: this.state.email, password: this.state.password };
         axios.post('http://localhost:8080/authenticate', loginDetails)
-            .then(response => this.setState({ verified: true}))
+            .then(response => {
+                document.cookie = "jwt-token=" + response.data;
+                document.cookie = "email=" + this.state.email;
+                var urlParams = new URLSearchParams(window.location.search);
+                var returnUrl = urlParams.get('retUrl');
+                window.location.href = "http://localhost:3000/" + returnUrl;
+            })
             .catch(error => this.setState({verified: false})); 
 
     } 
@@ -42,7 +46,7 @@ class LoginPage extends Component {
                 container
                 alignItems="center"
                 justifyContent="center">
-                    <Grid item xs={12} lg={4}>
+                    <Grid item xs={12} md={8} lg={6} xl={4}>
                         <div className={styles.item}>
                             {this.state.verified ? (
                                 <div>
