@@ -21,6 +21,9 @@ class LoginPage extends Component {
                 document.cookie = "email=" + this.state.email;
                 var urlParams = new URLSearchParams(window.location.search);
                 var returnUrl = urlParams.get('retUrl');
+                if (returnUrl === null) {
+                    returnUrl = "";
+                }
                 window.location.href = "http://localhost:3000/" + returnUrl;
             })
             .catch(error => this.setState({verified: false})); 

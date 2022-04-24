@@ -1,0 +1,26 @@
+.navlinks {
+    margin-left: 10px;
+    display: flex;
+}
+
+.toolbar {
+    background-color: #133A1B;
+}
+
+.logo {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    margin-left: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.link:hover {
+    border-bottom: 1px solid white;
+}

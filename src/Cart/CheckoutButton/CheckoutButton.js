@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import styles from "./CheckoutButton.module.css"
-import Cookies from 'js-cookie';
 
 class CheckoutButton extends Component {
     state = {
@@ -14,7 +13,7 @@ class CheckoutButton extends Component {
         let path = "/login?retUrl=payment"
 
         if (this.props.loggedIn) {
-            path = "/boxes/1"
+            path = "/payment"
         }
 
         this.setState({

@@ -26,9 +26,38 @@ class CheckoutForm extends React.Component {
     const transactionDetails = {amount: sessionStorage.getItem("total"), email: "", stripeToken: result.token.id, description: "VeggieBox transaction", currency: "GBP"}
     console.log(transactionDetails)
     axios.post('http://localhost:8080/charge', transactionDetails)
-            .then(response => console.log(response))
+            .then(response => this.writeOrder())
             .catch(error => console.log(error));
   };
+
+  getCookie = (cname) => {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+  writeOrder = async => {
+    let email = this.getCookie("email");
+    const userDetails = {email: email};
+    axios.post('http://localhost:8080/userid', userDetails)
+      .then(response => {
+        console.log(typeof response.data);
+        const orderDetails = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10)}
+        axios.post('http://localhost:8080/order', orderDetails, { withCredentials: true })
+          .then(response => console.log(response))
+      })
+      .catch(error => console.log(error));
+  }
 
   render() {
     const CARD_ELEMENT_OPTIONS = {
