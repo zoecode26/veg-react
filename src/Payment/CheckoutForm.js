@@ -51,10 +51,20 @@ class CheckoutForm extends React.Component {
     const userDetails = {email: email};
     axios.post('http://localhost:8080/userid', userDetails)
       .then(response => {
-        console.log(typeof response.data);
-        const orderDetails = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10)}
-        axios.post('http://localhost:8080/order', orderDetails, { withCredentials: true })
-          .then(response => console.log(response))
+        const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10)}
+        axios.post('http://localhost:8080/order', orderInfo, { withCredentials: true })
+          .then(response => {
+            const orderItems = new Map();
+            for(let key in sessionStorage) {
+              var intKey = parseInt(key)
+              if (Number.isInteger(intKey)) {
+                const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
+                axios.post('http://localhost:8080/orderitems', orderDetails, { withCredentials: true })
+                  .then(resonse => sessionStorage.clear())
+                  .catch(error => console.log(error));
+              }
+            }
+          })
       })
       .catch(error => console.log(error));
   }
