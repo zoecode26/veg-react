@@ -19,6 +19,7 @@ class AddToCartButton extends Component {
     }
     
     addToSession = () => {
+        console.log("GETTING TO ADD TO SESSION")
         var boxId = this.props.boxId
         var currentQuantity = parseInt(sessionStorage.getItem(boxId))
         var newQuantity = parseInt(sessionStorage.getItem("quantity"))
