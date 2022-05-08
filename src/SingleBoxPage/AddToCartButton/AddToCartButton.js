@@ -26,6 +26,10 @@ class AddToCartButton extends Component {
         console.log("current: " + currentQuantity)
         console.log("new: " + newQuantity)
 
+        if (currentQuantity == null || isNaN(currentQuantity)) {
+            currentQuantity = 0
+        }
+
         if (currentQuantity + newQuantity < 5) {
             console.log("INSIDE IF")
             sessionStorage.setItem(boxId, currentQuantity + newQuantity)
