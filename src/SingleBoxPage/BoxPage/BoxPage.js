@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 import styles from './BoxPage.module.css';
 import AddToCart from "../../Cart/AddToCart/AddToCart";
 import Vegetable from "../Vegetable/Vegetable";
+import axios from "axios";
 
 class BoxPage extends Component {
   state = {
