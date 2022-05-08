@@ -28,16 +28,11 @@ class OrderPage extends Component {
                 orderDetailsLoaded: true
             }) 
         })
-    this.setState({
-        loaded: true
-    });
   }
 
   render() {
     let orderItems = null
     if (this.state.orderDetailsLoaded && this.state.orderItemsLoaded) {
-        console.log(this.state.orderItems)
-        console.log(this.state.orderDetails)
         orderItems = this.state.orderItems.map(item => {
             return <OrderItem 
             boxId={item.boxId}

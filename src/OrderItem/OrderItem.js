@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import styles from './OrderItem.module.css';
 import { Grid } from '@mui/material';
-import { Link } from "react-router-dom";
-import { toHaveTextContent } from "@testing-library/jest-dom/dist/matchers";
 
 class OrderItem extends Component {
     state = {
@@ -11,13 +9,13 @@ class OrderItem extends Component {
     }
 
     async componentDidMount() {
-        const response = await fetch('/boxes/' + this.props.boxId);
-        const body = await response.json();
-        console.log(body)
-        this.setState({
-            boxData: body, 
-            loaded: true
-        });
+        axios.get('https://dry-forest-94057.herokuapp.com/boxes/'+ this.props.boxId)
+        .then(response => {
+            this.setState({
+                boxData: response.data, 
+                loaded: true
+            });
+        })
     }
 
     render() {
