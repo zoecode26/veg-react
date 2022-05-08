@@ -21,6 +21,7 @@ class CheckoutForm extends Component {
     }
     const response = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + intKey);
     const body = await response.json();
+    console.log(body.imagePath)
     this.setState({
       imgPath: body.imagePath, 
       loaded: true
