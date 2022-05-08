@@ -8,24 +8,30 @@ class BoxPage extends Component {
   state = {
     box: null,
     contents: [],
-    loaded: false
+    boxLoaded: false,
+    contentsLoaded: false
   }
 
   async componentDidMount() {
-    const boxResponse = await fetch('/boxes/' + this.props.id);
-    const boxBody = await boxResponse.json();
-    const contentsResponse = await fetch('/boxed-vegetables/' + this.props.id);
-    const contentsBody = await contentsResponse.json();
-    this.setState({
-      box: boxBody, 
-      contents: contentsBody,
-      loaded: true
+    axios.get('https://dry-forest-94057.herokuapp.com/boxes/' + this.props.id)
+          .then(response => {
+            this.setState({
+              box: response.data, 
+              boxLoaded: true
+            });
+          });  
+    axios.get('https://dry-forest-94057.herokuapp.com/boxed-vegetables/' + this.props.id)
+      .then(response => {
+        this.setState({
+          contents: response.data, 
+          contentsLoaded: true
+        });
     });
-  }
+  } 
 
   render() {
     let contents = null
-    if (this.state.loaded) {
+    if (this.state.boxLoaded && this.state.contentsLoaded) {
       contents = this.state.contents.map(content => {
         return <Vegetable 
           id={content.vegetableId}
