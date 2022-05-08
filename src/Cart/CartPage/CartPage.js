@@ -38,6 +38,7 @@ class Cart extends Component {
 
   async componentDidMount() {
     let email = this.getCookie("email");
+    console.log("EMAIL: " + email);
     if (email != "") {
       this.setState({
         signedIn: true, 
