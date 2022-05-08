@@ -34,12 +34,12 @@ class OrdersPage extends Component {
       .then(response => {
         console.log(response.data)
         axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data)
-          .then(response => { console.log(response.data)}
-            //   this.setState({
-            //     orders: response.data, 
-            //     loaded: true
-            // })
-          )
+          .then(response => { 
+              this.setState({
+                orders: response.data, 
+                loaded: true
+              })
+          })
         .catch(error => console.log(error));
       })
   }
