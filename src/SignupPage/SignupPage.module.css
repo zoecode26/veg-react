@@ -29,15 +29,21 @@
     width: 50%;
 }
 
+@media only screen and (max-width: 600px) {
+    .textField {
+        width: 75%;
+    }
+}
+
 .buttonContainer {
     padding-top: 3%;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
 .textFieldContainer {
     padding: 1%;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
 
@@ -49,4 +55,9 @@
 
 .loginPage {
     padding: 5%;
+}
+
+.buttonText {
+    text-decoration: none;
+    color: white;
 }

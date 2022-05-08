@@ -14,6 +14,7 @@ class QuantitySelector extends Component {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     onChange={handleChange}
+                    defaultValue= {1} 
                     label="Quantity">
                     <MenuItem value={1}>1</MenuItem>
                     <MenuItem value={2}>2</MenuItem>

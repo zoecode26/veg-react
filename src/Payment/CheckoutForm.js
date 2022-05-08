@@ -4,7 +4,30 @@ import { Grid } from "@mui/material";
 import styles from "./CheckoutForm.module.css"
 import axios from "axios";
 
-class CheckoutForm extends React.Component {
+class CheckoutForm extends Component {
+  state = {
+    imgPath: "",
+    loaded: false,
+  }
+
+  async componentDidMount() {
+    let idToFetch = 1
+    for(let key in sessionStorage) {
+      var intKey = parseInt(key)
+      if (Number.isInteger(intKey)) {
+        idToFetch = intKey;
+        break;
+      }
+    }
+    const response = await fetch('/boxes/' + intKey);
+    const body = await response.json();
+    this.setState({
+      imgPath: body.imagePath, 
+      loaded: true
+    });
+    
+  }
+  
   handleSubmit = async event => {
     event.preventDefault();
 
@@ -46,21 +69,21 @@ class CheckoutForm extends React.Component {
     return "";
   }
 
-  writeOrder = async => {
+  writeOrder = () => {
     let email = this.getCookie("email");
     const userDetails = {email: email};
     axios.post('http://localhost:8080/userid', userDetails)
       .then(response => {
-        const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10)}
-        axios.post('http://localhost:8080/order', orderInfo, { withCredentials: true })
+        const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
+        axios.post('http://localhost:8080/orders/new', orderInfo, { withCredentials: true })
           .then(response => {
-            const orderItems = new Map();
             for(let key in sessionStorage) {
               var intKey = parseInt(key)
               if (Number.isInteger(intKey)) {
                 const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
-                axios.post('http://localhost:8080/orderitems', orderDetails, { withCredentials: true })
-                  .then(resonse => sessionStorage.clear())
+                axios.post('http://localhost:8080/orders/orderitems', orderDetails, { withCredentials: true })
+                  .then(resonse => {sessionStorage.clear();
+                                    window.location.href = "http://localhost:3000/orders";})
                   .catch(error => console.log(error));
               }
             }
@@ -76,12 +99,13 @@ class CheckoutForm extends React.Component {
         style: {
           base: {
             iconColor: "#133A1B",
-            fontSize: "16px",
             fontFamily: '"Open Sans", sans-serif',
+            fontSize: "20px",
+            lineHeight: "100px",
             fontSmoothing: "antialiased",
             "::placeholder": {
               color: "#CFD7DF"
-            }
+            },
           },
           invalid: {
             color: "#e5424d",
@@ -100,11 +124,11 @@ class CheckoutForm extends React.Component {
                 justifyContent="center">
                 <Grid item xs={12} md={4}>
                     <div className={styles.item}>
-                    <h3 className={styles.heading}>Your total: £{sessionStorage.getItem("total")}.00</h3>
-                        <form>
-                            <CardElement options={CARD_ELEMENT_OPTIONS}/>
-                            <button className={styles.button} onClick={this.handleSubmit}>Buy Now</button>
-                        </form>
+                      <h3 className={styles.heading}>Your total: £{sessionStorage.getItem("total")}.00</h3>
+                      <form>
+                        <CardElement options={CARD_ELEMENT_OPTIONS} className={styles.element}/>
+                        <button className={styles.button} onClick={this.handleSubmit}>Buy Now</button>
+                      </form>
                     </div>
                 </Grid>
             </Grid>   

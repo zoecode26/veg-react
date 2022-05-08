@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import styles from './AddToCartButton.module.css';
+import { Link } from "@material-ui/core";
 
 class AddToCartButton extends Component { 
     state = {
@@ -35,6 +36,7 @@ class AddToCartButton extends Component {
             this.state.enabled = false
         }
         this.forceUpdate();
+        window.location.href = "http://localhost:3000/cart";
     }
 
     render() {
@@ -45,7 +47,7 @@ class AddToCartButton extends Component {
                             endIcon={<ShoppingCartIcon />}
                             variant="contained"
                             onClick={this.addToSession}>
-                            Add to cart
+                                Add to cart
                     </Button> 
                 );
             } else {

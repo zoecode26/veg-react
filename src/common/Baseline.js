@@ -7,7 +7,7 @@ class Baseline extends Component {
   render(){
     return (
       <CssBaseline />
-  );
+    );
   } 
 }
 

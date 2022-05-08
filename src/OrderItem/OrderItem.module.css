@@ -1,0 +1,38 @@
+.item {
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    padding: 1%;
+    margin-bottom: 1%;
+}
+
+.gridItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verticalCenter {
+    display: flex;
+    align-items: center;
+}
+
+.img {
+    border-radius: 15px;
+    width: 150px;
+}
+
+h2 {
+    display: flex;
+    align-items: center;
+}
+
+h3 { 
+    color: black;
+}
+
+.gridItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

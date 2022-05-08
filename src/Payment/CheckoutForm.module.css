@@ -17,3 +17,37 @@
 .page {
     padding: 5%;
 }
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h3 {
+    margin: 0;
+}
+
+.button {
+    margin: 0;
+}
+
+button, input[type="submit"], input[type="reset"] {
+	border: none;
+	padding: 0;
+	font: inherit;
+	outline: inherit;
+}
+
+.button {
+    background-color: #133A1B !important;
+    height: 30px !important;
+    width: 35%;
+    font-size: 14px !important;
+    color: white;
+}
+
+.button:hover {
+    text-decoration: underline;
+    background-color: #133A1B;
+}

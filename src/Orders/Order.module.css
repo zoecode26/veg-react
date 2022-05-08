@@ -1,0 +1,47 @@
+.item {
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    margin-bottom: 1%;
+}
+
+.img {
+    width: 100px;
+    border-radius: 15px;
+    margin-right: 5%;
+    padding: 1%;
+}
+
+.photo {
+    display: flex;
+    flex-grow: 1;
+}
+
+h4 {
+    display: flex;
+    align-items: center;
+}
+
+.details {
+    display: flex;
+    justify-content: flex-end;
+    flex-grow: 1;
+}
+
+.gridItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.page {
+    padding: 0.5%;
+}
+
+.linkText {
+    text-decoration: underline;
+    color: #133A1B;
+}   

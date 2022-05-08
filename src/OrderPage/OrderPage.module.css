@@ -1,0 +1,13 @@
+.orderHeading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.total {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.page {
+    padding: 0 2% !important;
+}

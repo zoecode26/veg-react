@@ -57,7 +57,7 @@ class LoginPage extends Component {
                                         <TextField id="outlined-basic" label="Email" name="email" variant="outlined" className={styles.textField} onChange={this.setEmail}/>
                                     </div>
                                     <div className={styles.textFieldContainer}>
-                                        <TextField id="outlined-basic" label="Password" name="password" variant="outlined" className={styles.textField} onChange={this.setPassword} />
+                                        <TextField id="outlined-basic" label="Password" name="password" type="password" variant="outlined" className={styles.textField} onChange={this.setPassword} />
                                     </div>
                                 </div>
                             ) : (
@@ -66,7 +66,7 @@ class LoginPage extends Component {
                                         <TextField error id="outlined-basic" label="Email" name="email" variant="outlined" className={styles.textField} onChange={this.setEmail}/>
                                     </div>
                                     <div className={styles.textFieldContainer}>
-                                        <TextField error id="outlined-basic" label="Password" name="password" variant="outlined" className={styles.textField} onChange={this.setPassword} helperText="Incorrect login details"/>
+                                        <TextField error id="outlined-basic" label="Password" name="password" type="password" variant="outlined" className={styles.textField} onChange={this.setPassword} helperText="Incorrect login details"/>
                                     </div>
                                 </div>
                             )}

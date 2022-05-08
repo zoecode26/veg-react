@@ -136,13 +136,13 @@ class SignupPage extends Component {
                                     <TextField id="outlined-basic" label="Email" variant="outlined" className={styles.textField} onChange={this.setEmail}/>
                                 </div>
                                 <div className={styles.textFieldContainer}>
-                                    <TextField id="outlined-basic" label="Password"  variant="outlined" className={styles.textField} onChange={this.setPassword} />
+                                    <TextField id="outlined-basic" label="Password" variant="outlined" type="password" className={styles.textField} onChange={this.setPassword} />
                                 </div>
                                 <div className={styles.buttonContainer}>
                                     <Button className={styles.button}
                                         variant="contained"
                                         onClick={this.signup}>
-                                            <Link to={"/cart"}>
+                                            <Link to={"/cart"} className={styles.buttonText}>
                                                 Signup
                                             </Link>
                                     </Button> 

@@ -30,6 +30,13 @@
     width: 50%;
 }
 
+
+@media only screen and (max-width: 600px) {
+    .textField {
+        width: 75%;
+    }
+}
+
 .buttonContainer {
     padding-top: 3%;
     display:flex;
