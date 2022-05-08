@@ -75,6 +75,7 @@ class Cart extends Component {
     let cartItems = null;
     if (this.state.loaded) {
       let count = this.state.cartItems.length;
+      console.log("COUNT: " + count)
       cartItems = this.state.cartItems.map(item => {
         return <CartItem 
           boxInfo={item}
