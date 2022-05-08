@@ -41,7 +41,7 @@ class Cart extends Component {
     console.log("EMAIL: " + email);
     if (email != "") {
       this.setState({
-        signedIn: true, 
+        loggedIn: true, 
       });
     }
     this.setState({
