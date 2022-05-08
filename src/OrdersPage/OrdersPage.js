@@ -33,7 +33,7 @@ class OrdersPage extends Component {
     axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .then(response => {
         console.log(response.data)
-        axios.get('/orders/users/' + response.data)
+        axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data)
           .then(response => { console.log(response.data)}
             //   this.setState({
             //     orders: response.data, 
