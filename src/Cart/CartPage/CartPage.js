@@ -53,10 +53,12 @@ class Cart extends Component {
       var intKey = parseInt(key)
       if (Number.isInteger(intKey)) {
         axios.get('https://dry-forest-94057.herokuapp.com/boxes/'+ intKey)
-        .then(response => {
-          cartItems.push(response.data)
-          total += response.data.price * sessionStorage.getItem(intKey)
-        })
+          .then(response => {
+            console.log("RESPONSE")
+            console.log(response.data)
+            cartItems.push(response.data)
+            total += response.data.price * sessionStorage.getItem(intKey)
+          })
       }
     }
 
