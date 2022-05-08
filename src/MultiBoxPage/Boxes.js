@@ -12,7 +12,7 @@ class Boxes extends Component {
   }
 
   async componentDidMount() {
-    axios.post('https://dry-forest-94057.herokuapp.com/boxes')
+    axios.get('https://dry-forest-94057.herokuapp.com/boxes')
             .then(response => {
               console.log(response)
             })
