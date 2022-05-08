@@ -3,6 +3,7 @@ import OrderItem from "../OrderItem/OrderItem";
 import Aux from 'react-aux';
 import styles from './OrderPage.module.css';
 import { Grid } from '@mui/material';
+import axios from "axios";
  
 class OrderPage extends Component {
   state = {
@@ -12,14 +13,19 @@ class OrderPage extends Component {
   }
 
   async componentDidMount() {
-    const itemsResponse = await fetch('/orders/items/' + this.props.id);
-    const itemsBody = await itemsResponse.json();
-    const orderResponse = await fetch('/orders/' + this.props.id);
-    const orderBody = await orderResponse.json();
-    console.log(orderBody)
+    axios.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id)
+        .then(response => {
+            this.setState({
+                orderItems: response.data, 
+            }) 
+        })
+    axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id)
+        .then(response => {
+            this.setState({
+                orderDetails: response.data, 
+            }) 
+        })
     this.setState({
-        orderItems: itemsBody, 
-        orderDetails: orderBody,
         loaded: true
     });
   }
