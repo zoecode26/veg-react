@@ -22,11 +22,15 @@ class AddToCartButton extends Component {
         var boxId = this.props.boxId
         var currentQuantity = parseInt(sessionStorage.getItem(boxId))
         var newQuantity = parseInt(sessionStorage.getItem("quantity"))
+        console.log("current: " + currentQuantity)
+        console.log("new: " + newQuantity)
 
         if (currentQuantity + newQuantity < 5) {
+            console.log("INSIDE IF")
             sessionStorage.setItem(boxId, currentQuantity + newQuantity)
         } else {
             sessionStorage.setItem(boxId, 5)
+            console.log("INSIDE ELSE")
             this.state.enabled = false
         }
         this.forceUpdate();
