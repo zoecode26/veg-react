@@ -60,15 +60,14 @@ class Cart extends Component {
             total += response.data.price * sessionStorage.getItem(intKey)
           })
       }
+      this.setState({
+        cartItems: cartItems,
+        loaded: true,
+        total: total,
+      })
     }
 
     sessionStorage.setItem("total", total);
-
-    this.setState({
-      cartItems: cartItems,
-      loaded: true,
-      total: total,
-    })
   }
 
   render() {
