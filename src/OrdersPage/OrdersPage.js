@@ -30,7 +30,7 @@ class OrdersPage extends Component {
   async componentDidMount() {
     let email = this.getCookie("email");
     const userDetails = {email: email};
-    axios.post('http://localhost:8080/userid', userDetails)
+    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .then(response => {
         console.log(response.data)
         axios.get('/orders/users/' + response.data)

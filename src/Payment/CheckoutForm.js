@@ -48,7 +48,7 @@ class CheckoutForm extends Component {
 
     const transactionDetails = {amount: sessionStorage.getItem("total"), email: "", stripeToken: result.token.id, description: "VeggieBox transaction", currency: "GBP"}
     console.log(transactionDetails)
-    axios.post('http://localhost:8080/charge', transactionDetails)
+    axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
             .then(response => this.writeOrder())
             .catch(error => console.log(error));
   };
@@ -72,16 +72,16 @@ class CheckoutForm extends Component {
   writeOrder = () => {
     let email = this.getCookie("email");
     const userDetails = {email: email};
-    axios.post('http://localhost:8080/userid', userDetails)
+    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .then(response => {
         const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
-        axios.post('http://localhost:8080/orders/new', orderInfo, { withCredentials: true })
+        axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo, { withCredentials: true })
           .then(response => {
             for(let key in sessionStorage) {
               var intKey = parseInt(key)
               if (Number.isInteger(intKey)) {
                 const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
-                axios.post('http://localhost:8080/orders/orderitems', orderDetails, { withCredentials: true })
+                axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails, { withCredentials: true })
                   .then(resonse => {sessionStorage.clear();
                                     window.location.href = "http://localhost:3000/orders";})
                   .catch(error => console.log(error));

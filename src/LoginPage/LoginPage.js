@@ -15,7 +15,7 @@ class LoginPage extends Component {
 
     verifyLogin = () => {
         const loginDetails = { email: this.state.email, password: this.state.password };
-        axios.post('http://localhost:8080/authenticate', loginDetails)
+        axios.post('https://dry-forest-94057.herokuapp.com/authenticate', loginDetails)
             .then(response => {
                 document.cookie = "jwt-token=" + response.data;
                 document.cookie = "email=" + this.state.email;

@@ -25,9 +25,9 @@ class Cart extends Component {
   async componentDidMount() {
 
     const testDetails = { test: "Test" };
-    axios.post('http://localhost:8080/authstatus', testDetails , { withCredentials: true })
-            .then(response => this.setState({loggedIn: true}))
-            .catch(error => this.setState({loggedIn: false})); 
+    axios.post('https://dry-forest-94057.herokuapp.com/authstatus', testDetails , { withCredentials: true })
+      .then(response => this.setState({loggedIn: true}))
+      .catch(error => this.setState({loggedIn: false})); 
 
     var cartItems = []
     var total = 0
