@@ -13,15 +13,13 @@ class Boxes extends Component {
 
   async componentDidMount() {
     axios.get('https://dry-forest-94057.herokuapp.com/boxes')
-            .then(response => {
-              console.log(response)
-            })
-    // const response = await fetch('/boxes');
-    // const body = await response.json();
-    // this.setState({
-    //   boxes: body, 
-    //   loaded: true
-    // });
+      .then(response => {
+        console.log(response.data)
+        this.setState({
+          boxes: response.data, 
+          loaded: true
+        });
+      })
   }
 
   render() {
