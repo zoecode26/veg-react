@@ -19,7 +19,7 @@ class CheckoutForm extends Component {
         break;
       }
     }
-    const response = await fetch('/boxes/' + intKey);
+    const response = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + intKey);
     const body = await response.json();
     this.setState({
       imgPath: body.imagePath, 
@@ -74,6 +74,7 @@ class CheckoutForm extends Component {
     const userDetails = {email: email};
     axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .then(response => {
+        console.log(this.state.imgPath)
         const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
         axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo, { withCredentials: true })
           .then(response => {
