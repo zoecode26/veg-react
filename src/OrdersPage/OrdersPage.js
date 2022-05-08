@@ -44,8 +44,8 @@ class OrdersPage extends Component {
 
   render() {
     let orders = null
-    console.log(this.state.orders)
     if (this.state.loaded) {
+      console.log(this.state.orders)
       orders = this.state.orders.map(order => {
         return <Order 
           id={order.id}
