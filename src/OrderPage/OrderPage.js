@@ -9,7 +9,8 @@ class OrderPage extends Component {
   state = {
     orderItems: null,
     orderDetails: null,
-    loaded: false,
+    orderItemsLoaded: false,
+    orderDetailsLoaded: false,
   }
 
   async componentDidMount() {
@@ -17,12 +18,14 @@ class OrderPage extends Component {
         .then(response => {
             this.setState({
                 orderItems: response.data, 
+                orderItemsLoaded: true
             }) 
         })
     axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id)
         .then(response => {
             this.setState({
                 orderDetails: response.data, 
+                orderDetailsLoaded: true
             }) 
         })
     this.setState({
@@ -32,8 +35,9 @@ class OrderPage extends Component {
 
   render() {
     let orderItems = null
-    if (this.state.loaded) {
+    if (this.state.orderDetailsLoaded && this.state.orderItemsLoaded) {
         console.log(this.state.orderItems)
+        console.log(this.state.orderDetails)
         orderItems = this.state.orderItems.map(item => {
             return <OrderItem 
             boxId={item.boxId}
