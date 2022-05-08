@@ -38,6 +38,7 @@ class AddToCartButton extends Component {
             console.log("INSIDE ELSE")
             this.state.enabled = false
         }
+        sessionStorage.setItem("quantity", 0)
         this.forceUpdate();
         window.location.href = "https://react-veg.herokuapp.com/";
     }
