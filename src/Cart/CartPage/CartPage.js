@@ -9,9 +9,9 @@ import axios from "axios";
 
 class Cart extends Component {
   state = {
-    cartItems: null,
+    cartItems: [],
     loaded: false,
-    total: null,
+    total: 0,
     loggedIn: false,
   }
 
