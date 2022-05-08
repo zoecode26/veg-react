@@ -83,7 +83,7 @@ class CheckoutForm extends Component {
                 const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
                 axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails, { withCredentials: true })
                   .then(resonse => {sessionStorage.clear();
-                                    window.location.href = "http://localhost:3000/orders";})
+                                    window.location.href = "https://react-veg.herokuapp.com/";})
                   .catch(error => console.log(error));
               }
             }

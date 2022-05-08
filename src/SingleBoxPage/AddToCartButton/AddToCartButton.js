@@ -20,14 +20,8 @@ class AddToCartButton extends Component {
     
     addToSession = () => {
         var boxId = this.props.boxId
-        var currentQuantity = sessionStorage.getItem(boxId)
+        var currentQuantity = parseInt(sessionStorage.getItem(boxId))
         var newQuantity = parseInt(sessionStorage.getItem("quantity"))
-
-        if (currentQuantity == null) {
-            currentQuantity = 0
-        } else {
-            currentQuantity = parseInt(currentQuantity)
-        }
 
         if (currentQuantity + newQuantity < 5) {
             sessionStorage.setItem(boxId, currentQuantity + newQuantity)
@@ -36,7 +30,7 @@ class AddToCartButton extends Component {
             this.state.enabled = false
         }
         this.forceUpdate();
-        window.location.href = "http://localhost:3000/cart";
+        window.location.href = "https://react-veg.herokuapp.com/";
     }
 
     render() {

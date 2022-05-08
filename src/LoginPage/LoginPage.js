@@ -24,7 +24,7 @@ class LoginPage extends Component {
                 if (returnUrl === null) {
                     returnUrl = "";
                 }
-                window.location.href = "http://localhost:3000/" + returnUrl;
+                window.location.href = "https://react-veg.herokuapp.com/" + returnUrl;
             })
             .catch(error => this.setState({verified: false})); 
 
