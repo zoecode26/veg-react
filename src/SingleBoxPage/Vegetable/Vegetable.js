@@ -10,12 +10,13 @@ class Vegetable extends Component {
     } 
 
     async componentDidMount() {
-        const response = await fetch('/vegetables/' + this.props.id);
-        const body = await response.json();
-        this.setState({
-          vegetable: body, 
-          loaded: true
-        });
+        axios.get('https://dry-forest-94057.herokuapp.com/vegetables/' + this.props.id)
+          .then(response => {
+            this.setState({
+                vegetable: response.data, 
+                loaded: true
+            });
+          });  
     }
 
     render() {
