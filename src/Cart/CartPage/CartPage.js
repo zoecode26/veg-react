@@ -52,29 +52,26 @@ class Cart extends Component {
     for(let key in sessionStorage) {
       var intKey = parseInt(key)
       if (Number.isInteger(intKey)) {
-        axios.get('https://dry-forest-94057.herokuapp.com/boxes/'+ intKey)
-          .then(response => {
-            console.log("RESPONSE")
-            console.log(response.data)
-            cartItems.push(response.data)
-            total += response.data.price * sessionStorage.getItem(intKey)
-          })
+        const boxInfo = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + intKey)
+        const body = await boxInfo.json();
+        cartItems.push(body)
+        total += body.price * sessionStorage.getItem(intKey)
       }
-      this.setState({
-        cartItems: cartItems,
-        loaded: true,
-        total: total,
-      })
     }
 
     sessionStorage.setItem("total", total);
+
+    this.setState({
+      cartItems: cartItems,
+      loaded: true,
+      total: total,
+    })
   }
 
   render() {
     let cartItems = null;
     if (this.state.loaded) {
       let count = this.state.cartItems.length;
-      console.log("COUNT: " + count)
       cartItems = this.state.cartItems.map(item => {
         return <CartItem 
           boxInfo={item}
