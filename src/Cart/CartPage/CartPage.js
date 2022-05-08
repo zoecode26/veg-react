@@ -4,8 +4,6 @@ import NoItems from "../NoItems/NoItems";
 import CartHeader from "../CartHeader/CartHeader";
 import { Grid } from "@material-ui/core";
 import styles from './CartPage.module.css';
-import { Button } from "@mui/material";
-import { Link } from "react-router-dom";
 import CheckoutButton from "../CheckoutButton/CheckoutButton";
 import axios from "axios"; 
 
@@ -22,22 +20,43 @@ class Cart extends Component {
     this.forceUpdate();
   } 
 
-  async componentDidMount() {
+  getCookie = (cname) => {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
 
-    const testDetails = { test: "Test" };
-    axios.post('https://dry-forest-94057.herokuapp.com/authstatus', testDetails , { withCredentials: true })
-      .then(response => this.setState({loggedIn: true}))
-      .catch(error => this.setState({loggedIn: false})); 
+  async componentDidMount() {
+    let email = this.getCookie("email");
+    if (email != "") {
+      this.setState({
+        signedIn: true, 
+      });
+    }
+    this.setState({
+      loaded: true,
+    })
 
     var cartItems = []
     var total = 0
     for(let key in sessionStorage) {
       var intKey = parseInt(key)
       if (Number.isInteger(intKey)) {
-        const boxInfo = await fetch('/boxes/' + intKey)
-        const body = await boxInfo.json();
-        cartItems.push(body)
-        total += body.price * sessionStorage.getItem(intKey)
+        axios.get('https://dry-forest-94057.herokuapp.com/boxes/'+ intKey)
+        .then(response => {
+          cartItems.push(response.data)
+          total += response.data.price * sessionStorage.getItem(intKey)
+        })
       }
     }
 
