@@ -9,9 +9,9 @@ import axios from "axios";
 
 class Cart extends Component {
   state = {
-    cartItems: null,
+    cartItems: [],
     loaded: false,
-    total: null,
+    total: 0,
     loggedIn: false,
   }
 
@@ -52,11 +52,10 @@ class Cart extends Component {
     for(let key in sessionStorage) {
       var intKey = parseInt(key)
       if (Number.isInteger(intKey)) {
-        axios.get('https://dry-forest-94057.herokuapp.com/boxes/'+ intKey)
-        .then(response => {
-          cartItems.push(response.data)
-          total += response.data.price * sessionStorage.getItem(intKey)
-        })
+        const boxInfo = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + intKey)
+        const body = await boxInfo.json();
+        cartItems.push(body)
+        total += body.price * sessionStorage.getItem(intKey)
       }
     }
 

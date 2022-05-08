@@ -26,6 +26,10 @@ class AddToCartButton extends Component {
         console.log("current: " + currentQuantity)
         console.log("new: " + newQuantity)
 
+        if (currentQuantity == null || isNaN(currentQuantity)) {
+            currentQuantity = 0
+        }
+
         if (currentQuantity + newQuantity < 5) {
             console.log("INSIDE IF")
             sessionStorage.setItem(boxId, currentQuantity + newQuantity)
@@ -34,8 +38,9 @@ class AddToCartButton extends Component {
             console.log("INSIDE ELSE")
             this.state.enabled = false
         }
+        sessionStorage.setItem("quantity", 1)
         this.forceUpdate();
-        window.location.href = "https://react-veg.herokuapp.com/";
+        window.location.href = "https://react-veg.herokuapp.com/cart";
     }
 
     render() {
