@@ -4,7 +4,7 @@ class SignOut extends Component {
   async componentDidMount() {
     document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
     document.cookie = "jwt-token=; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-    window.location.href = "http://localhost:3000/";
+    window.location.href = "https://react-veg.herokuapp.com/";
   }
 
   render() {
