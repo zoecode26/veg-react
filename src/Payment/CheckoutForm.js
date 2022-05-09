@@ -48,7 +48,6 @@ class CheckoutForm extends Component {
     }
 
     const transactionDetails = {amount: sessionStorage.getItem("total"), email: "", stripeToken: result.token.id, description: "VeggieBox transaction", currency: "GBP"}
-    console.log(transactionDetails)
     axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
             .then(response => this.writeOrder())
             .catch(error => console.log(error));
@@ -85,7 +84,7 @@ class CheckoutForm extends Component {
                 const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
                 axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails, { withCredentials: true })
                   .then(resonse => {sessionStorage.clear();
-                                    window.location.href = "https://react-veg.herokuapp.com/";})
+                      window.location.href = "https://react-veg.herokuapp.com/orders";})
                   .catch(error => console.log(error));
               }
             }
