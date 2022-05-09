@@ -8,7 +8,7 @@ class CartHeader extends Component {
             container
             alignItems="center"
             justifyContent="center">
-          <Grid item xs={12} lg={8}>
+          <Grid item xs={12} md={8}>
             <div>
                 <h1> Cart </h1>
             </div>
