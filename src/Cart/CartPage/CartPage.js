@@ -83,12 +83,13 @@ class Cart extends Component {
       if (cartItems.length > 0) {
         return (
           <div className={styles.cartPage}>
-            <CartHeader />
-            {cartItems}
             <Grid
               container
               alignItems="center"
               justifyContent="center">
+              
+              <CartHeader />
+              {cartItems}
 
               <Grid item xs={12} md={8} className={styles.totalContainer}>
                 <div className={styles.item}>
@@ -102,12 +103,13 @@ class Cart extends Component {
       } else {
         return (
           <div className={styles.cartPage}>
-            <CartHeader />
-            <NoItems />
             <Grid
               container
               alignItems="center"
               justifyContent="center">
+              
+              <CartHeader />
+              <NoItems />
 
               <Grid item xs={12} md={8}>
                 <div className={styles.item}>
