@@ -90,7 +90,7 @@ class Cart extends Component {
               alignItems="center"
               justifyContent="center">
 
-              <Grid item xs={12} lg={8} className={styles.totalContainer}>
+              <Grid item xs={12} md={8} className={styles.totalContainer}>
                 <div className={styles.item}>
                   <h2> Total: £{this.state.total}.00</h2> 
                 </div>
@@ -109,7 +109,7 @@ class Cart extends Component {
               alignItems="center"
               justifyContent="center">
 
-              <Grid item xs={12} lg={8}>
+              <Grid item xs={12} md={8}>
                 <div className={styles.item}>
                   <h2> Total: £0.00 </h2>
                 </div>
