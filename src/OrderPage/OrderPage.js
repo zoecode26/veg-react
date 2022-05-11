@@ -21,7 +21,7 @@ class OrderPage extends Component {
                 orderItemsLoaded: true
             }) 
         })
-    axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id)
+    axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id, { withCredentials: true })
         .then(response => {
             this.setState({
                 orderDetails: response.data, 
