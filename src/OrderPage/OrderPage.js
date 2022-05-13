@@ -13,6 +13,22 @@ class OrderPage extends Component {
     orderDetailsLoaded: false,
   }
 
+  getCookie = (cname) => {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
   async componentDidMount() {
     axios.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id)
         .then(response => {
@@ -23,7 +39,7 @@ class OrderPage extends Component {
         })
         axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id, {
             headers: {
-                Authorization: "Bearer hello"
+                Authorization: "Bearer " + this.getCookie("jwt-token")
             }
         }).then(response => {
             this.setState({
