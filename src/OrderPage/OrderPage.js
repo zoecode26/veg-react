@@ -23,7 +23,7 @@ class OrderPage extends Component {
         })
         axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id, {
             headers: {
-                Cookie: "cookie1=value; cookie2=value; cookie3=value;"
+                Authorization: "Bearer hello"
             }
         }).then(response => {
             this.setState({
