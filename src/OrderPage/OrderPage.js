@@ -30,8 +30,11 @@ class OrderPage extends Component {
   }
 
   async componentDidMount() {
-    axios.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id)
-        .then(response => {
+    axios.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id, {
+        headers: {
+            Authorization: "Bearer " + this.getCookie("jwt-token")
+        }
+        }).then(response => {
             this.setState({
                 orderItems: response.data, 
                 orderItemsLoaded: true
