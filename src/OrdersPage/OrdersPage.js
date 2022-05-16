@@ -30,7 +30,11 @@ class OrdersPage extends Component {
   async componentDidMount() {
     let email = this.getCookie("email");
     const userDetails = {email: email};
-    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
+    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails, {
+      headers: {
+          Authorization: "Bearer " + this.getCookie("jwt-token")
+      }
+      })
       .then(response => {
         console.log(response.data)
         axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data)
