@@ -43,7 +43,7 @@ class BoxPage extends Component {
           });  
     axios.get('https://dry-forest-94057.herokuapp.com/boxed-vegetables/' + this.props.id, {
       headers: {
-          Authorization: "Bearer " + this.getCookie("jwt-token")
+          Authorization: "Bearer " + "hey!"
       }
       })
       .then(response => {
