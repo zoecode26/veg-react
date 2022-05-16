@@ -41,11 +41,11 @@ class OrderPage extends Component {
             }) 
         })
         axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id 
-        // {
-        //     headers: {
-        //         Authorization: "Bearer " + this.getCookie("jwt-token")
-        //     }
-        // }
+        {
+            headers: {
+                Authorization: "Bearer " + this.getCookie("jwt-token")
+            }
+        }
         ).then(response => {
             this.setState({
                 orderDetails: response.data, 
