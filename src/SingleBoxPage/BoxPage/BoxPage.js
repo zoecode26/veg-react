@@ -30,22 +30,14 @@ class BoxPage extends Component {
   }
 
   async componentDidMount() {
-    axios.get('https://dry-forest-94057.herokuapp.com/boxes/' + this.props.id, {
-      headers: {
-          Authorization: "Bearer " + this.getCookie("jwt-token")
-      }
-      })
+    axios.get('https://dry-forest-94057.herokuapp.com/boxes/' + this.props.id)
           .then(response => {
             this.setState({
               box: response.data, 
               boxLoaded: true
             });
           });  
-    axios.get('https://dry-forest-94057.herokuapp.com/boxed-vegetables/' + this.props.id, {
-      headers: {
-          Authorization: "Bearer " + "hey!"
-      }
-      })
+    axios.get('https://dry-forest-94057.herokuapp.com/boxed-vegetables/' + this.props.id)
       .then(response => {
         this.setState({
           contents: response.data, 
