@@ -14,7 +14,11 @@ class BoxPage extends Component {
   }
 
   async componentDidMount() {
-    axios.get('https://dry-forest-94057.herokuapp.com/boxes/' + this.props.id)
+    axios.get('https://dry-forest-94057.herokuapp.com/boxes/' + this.props.id, {
+      headers: {
+          Authorization: "Bearer " + this.getCookie("jwt-token")
+      }
+      })
           .then(response => {
             this.setState({
               box: response.data, 
