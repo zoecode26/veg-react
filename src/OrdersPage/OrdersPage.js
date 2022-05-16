@@ -37,7 +37,11 @@ class OrdersPage extends Component {
       })
       .then(response => {
         console.log(response.data)
-        axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data)
+        axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data, {
+          headers: {
+              Authorization: "Bearer " + this.getCookie("jwt-token")
+          }
+          })
           .then(response => { 
               this.setState({
                 orders: response.data, 
