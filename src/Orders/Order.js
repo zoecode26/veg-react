@@ -5,7 +5,8 @@ import { Grid } from '@mui/material';
 class Order extends Component {
     render() {
         var path = "/orders/" + this.props.id
-        // var date = this.props.date.substring(2)
+        var timestamp = new Date(this.props.date * 1000);
+        var date = timestamp.getDate();
         return ( 
             <Grid item xs={12} md={5}>
                     <a href={path} style={{ textDecoration: 'none', color: 'black' }}>
@@ -20,7 +21,7 @@ class Order extends Component {
                             <h4> £{this.props.price}.00 </h4>
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} className={styles.gridItem}>
-                            <h4> {this.props.date} </h4>
+                            <h4> {date} </h4>
                         </Grid>
                     </div>
                 </a>  
