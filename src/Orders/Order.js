@@ -5,8 +5,10 @@ import { Grid } from '@mui/material';
 class Order extends Component {
     render() {
         var path = "/orders/" + this.props.id
-        var timestamp = new Date(this.props.date);
-        var date = timestamp.getDate().toLocaleString();
+        console.log(this.props.date)
+        var timestamp = new Date(this.props.date * 1000);
+        var date = timestamp.getDate().toLocaleDateString("en-US");
+        console.log(date)
         return ( 
             <Grid item xs={12} md={5}>
                     <a href={path} style={{ textDecoration: 'none', color: 'black' }}>
