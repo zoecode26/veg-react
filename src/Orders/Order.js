@@ -6,7 +6,7 @@ class Order extends Component {
     render() {
         var path = "/orders/" + this.props.id
         var timestamp = new Date(this.props.date * 1000);
-        var date = timestamp.getDate().toLocaleString;
+        var date = timestamp.getDate().toLocaleString();
         return ( 
             <Grid item xs={12} md={5}>
                     <a href={path} style={{ textDecoration: 'none', color: 'black' }}>
