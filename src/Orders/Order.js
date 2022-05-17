@@ -5,7 +5,7 @@ import { Grid } from '@mui/material';
 class Order extends Component {
     render() {
         var path = "/orders/" + this.props.id
-        var timestamp = new Date(this.props.date * 1000);
+        var timestamp = new Date(this.props.date);
         var date = timestamp.getDate().toLocaleString();
         return ( 
             <Grid item xs={12} md={5}>
