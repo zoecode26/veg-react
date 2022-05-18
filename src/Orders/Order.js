@@ -8,7 +8,7 @@ class Order extends Component {
         console.log(this.props.date)
         var timestamp = new Date(this.props.date * 1000);
         console.log(timestamp)
-        var date = timestamp.toLocaleDateString("en-US");
+        var date = timestamp.toLocaleDateString("en-GB");
         console.log(date)
         console.log("---------")
         return ( 
