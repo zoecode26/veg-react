@@ -7,10 +7,47 @@ import axios from "axios";
 class CheckoutForm extends Component {
   state = {
     imgPath: "",
-    loaded: false,
+    userId: null,
+    imgPathLoaded: false,
+    userIdLoaded: false,
+  }
+
+  getCookie = (cname) => {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let ca = decodedCookie.split(';');
+    for(let i = 0; i <ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
   }
 
   async componentDidMount() {
+    let email = this.getCookie("email");
+    const userDetails = {email: email};
+    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails, {
+      headers: {
+          Authorization: "Bearer " + this.getCookie("jwt-token")
+      }
+      })
+      .catch(error => {
+        if (error.response.status === 403) {
+          window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
+        }
+      })
+      .then(response => {
+        this.setState({
+          userId: response.data, 
+          userIdLoaded: true
+        });
+      })
+
     let idToFetch = 1
     for(let key in sessionStorage) {
       var intKey = parseInt(key)
@@ -21,10 +58,9 @@ class CheckoutForm extends Component {
     }
     const response = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + intKey);
     const body = await response.json();
-    console.log(body.imagePath)
     this.setState({
       imgPath: body.imagePath, 
-      loaded: true
+      imgPathLoaded: true
     });
     
   }
@@ -53,44 +89,21 @@ class CheckoutForm extends Component {
             .catch(error => console.log(error));
   };
 
-  getCookie = (cname) => {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
   writeOrder = () => {
-    let email = this.getCookie("email");
-    const userDetails = {email: email};
-    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
+    const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
+    axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo)
       .then(response => {
-        console.log(this.state.imgPath)
-        const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
-        axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo, { withCredentials: true })
-          .then(response => {
-            for(let key in sessionStorage) {
-              var intKey = parseInt(key)
-              if (Number.isInteger(intKey)) {
-                const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
-                axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails, { withCredentials: true })
-                  .then(resonse => {sessionStorage.clear();
-                      window.location.href = "https://react-veg.herokuapp.com/orders";})
-                  .catch(error => console.log(error));
-              }
-            }
-          })
+        for(let key in sessionStorage) {
+          var intKey = parseInt(key)
+          if (Number.isInteger(intKey)) {
+            const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
+            axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails)
+              .then(resonse => {sessionStorage.clear();
+                  window.location.href = "https://react-veg.herokuapp.com/orders";})
+              .catch(error => console.log(error));
+          }
+        }
       })
-      .catch(error => console.log(error));
   }
 
   render() {

@@ -34,19 +34,26 @@ class OrderPage extends Component {
         headers: {
             Authorization: "Bearer " + this.getCookie("jwt-token")
         }
+        }).catch(error => {
+            if (error.response.status === 403) {
+              window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders/" + this.props.id;
+            }
         }).then(response => {
             this.setState({
                 orderItems: response.data, 
                 orderItemsLoaded: true
             }) 
         })
-        axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id, 
-        {
+
+        axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id, {
             headers: {
                 Authorization: "Bearer " + this.getCookie("jwt-token")
             }
-        }
-        ).then(response => {
+        }).catch(error => {
+            if (error.response.status === 403) {
+              window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders/" + this.props.id;
+            }
+        }).then(response => {
             this.setState({
                 orderDetails: response.data, 
                 orderDetailsLoaded: true

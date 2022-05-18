@@ -9,18 +9,18 @@ class CheckoutButton extends Component {
         loaded: false,
     }
 
-    async componentDidMount() {
-        let path = "/login?retUrl=payment"
+    // async componentDidMount() {
+    //     let path = "/login?retUrl=payment"
 
-        if (this.props.loggedIn) {
-            path = "/payment"
-        }
+    //     if (this.props.loggedIn) {
+    //         path = "/payment"
+    //     }
 
-        this.setState({
-            path: path,
-            loaded: true
-        });
-    }
+    //     this.setState({
+    //         path: path,
+    //         loaded: true
+    //     });
+    // }
 
     render() {
         if (this.state.loaded) {
@@ -29,7 +29,7 @@ class CheckoutButton extends Component {
                     <Button className={styles.button}
                         variant="contained"
                         onClick={() => ""}>
-                        <Link to={this.state.path} className={styles.buttonText}>
+                        <Link to={"/payment"} className={styles.buttonText}>
                             Checkout
                         </Link>
                     </Button> 

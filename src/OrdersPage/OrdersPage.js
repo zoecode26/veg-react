@@ -36,7 +36,6 @@ class OrdersPage extends Component {
       }
       })
       .catch(error => {
-        console.log("Getting an error");
         if (error.response.status === 403) {
           window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";
         }
@@ -47,6 +46,11 @@ class OrdersPage extends Component {
           headers: {
               Authorization: "Bearer " + this.getCookie("jwt-token")
           }
+          })
+          .catch(error => {
+            if (error.response.status === 403) {
+              window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";
+            }
           })
           .then(response => { 
               this.setState({
