@@ -95,13 +95,21 @@ class CheckoutForm extends Component {
 
   writeOrder = () => {
     const orderInfo = {price: sessionStorage.getItem("total"), webUserId: this.state.userId, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
-    axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo)
+    axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo, {
+      headers: {
+          Authorization: "Bearer " + this.getCookie("jwt-token")
+      }
+      })
       .then(response => {
         for(let key in sessionStorage) {
           var intKey = parseInt(key)
           if (Number.isInteger(intKey)) {
             const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
-            axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails)
+            axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails, {
+              headers: {
+                  Authorization: "Bearer " + this.getCookie("jwt-token")
+              }
+              })
               .then(resonse => {sessionStorage.clear();
                   window.location.href = "https://react-veg.herokuapp.com/orders";})
               .catch(error => console.log(error));
