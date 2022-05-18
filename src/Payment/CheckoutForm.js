@@ -90,7 +90,7 @@ class CheckoutForm extends Component {
   };
 
   writeOrder = () => {
-    const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
+    const orderInfo = {price: sessionStorage.getItem("total"), webUserId: this.state.userId, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
     axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo)
       .then(response => {
         for(let key in sessionStorage) {
