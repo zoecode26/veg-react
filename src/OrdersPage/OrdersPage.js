@@ -48,7 +48,11 @@ class OrdersPage extends Component {
                 loaded: true
               })
           })
-        .catch(error => console.log(error));
+        .catch(error => {
+          if (error.response.status === 403) {
+            window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";
+          }
+        });
       })
   }
 

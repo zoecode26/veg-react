@@ -75,7 +75,7 @@ class Navbar extends Component {
                 <Link to="/" className={styles.link}>
                   Boxes
                 </Link>
-                <Link to="/login?retUrl=orders" className={styles.link}>
+                <Link to="orders" className={styles.link}>
                   My Orders
                 </Link>
                 <Link to="/login" className={styles.link}>
