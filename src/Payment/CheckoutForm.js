@@ -84,9 +84,13 @@ class CheckoutForm extends Component {
     }
 
     const transactionDetails = {amount: sessionStorage.getItem("total"), email: "", stripeToken: result.token.id, description: "VeggieBox transaction", currency: "GBP"}
-    axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
-            .then(response => this.writeOrder())
-            .catch(error => console.log(error));
+    axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails, {
+      headers: {
+          Authorization: "Bearer " + this.getCookie("jwt-token")
+      }
+      })
+      .then(response => this.writeOrder())
+      .catch(error => console.log(error));
   };
 
   writeOrder = () => {
