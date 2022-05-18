@@ -7,8 +7,10 @@ class Order extends Component {
         var path = "/orders/" + this.props.id
         console.log(this.props.date)
         var timestamp = new Date(this.props.date * 1000);
-        var date = timestamp.getDate().toLocaleDateString("en-US");
+        console.log(timestamp)
+        var date = timestamp.toLocaleDateString("en-US");
         console.log(date)
+        console.log("---------")
         return ( 
             <Grid item xs={12} md={5}>
                     <a href={path} style={{ textDecoration: 'none', color: 'black' }}>
