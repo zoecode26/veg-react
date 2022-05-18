@@ -35,6 +35,11 @@ class OrdersPage extends Component {
           Authorization: "Bearer " + this.getCookie("jwt-token")
       }
       })
+      .catch(error => {
+        if (error.response.status === 403) {
+          window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";
+        }
+      })
       .then(response => {
         console.log(response.data)
         axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data, {
@@ -47,12 +52,7 @@ class OrdersPage extends Component {
                 orders: response.data, 
                 loaded: true
               })
-          })
-        .catch(error => {
-          if (error.response.status === 403) {
-            window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";
-          }
-        });
+          });
       })
   }
 
