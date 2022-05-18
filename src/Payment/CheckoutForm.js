@@ -100,6 +100,11 @@ class CheckoutForm extends Component {
           Authorization: "Bearer " + this.getCookie("jwt-token")
       }
       })
+      .catch(error => {
+        if (error.response.status === 403) {
+          window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
+        }
+      })
       .then(response => {
         for(let key in sessionStorage) {
           var intKey = parseInt(key)
