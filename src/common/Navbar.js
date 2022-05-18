@@ -49,6 +49,7 @@ class Navbar extends Component {
       if (this.state.signedIn) {
         return (
           <AppBar position="static">
+            <CssBaseline />
             <Toolbar className={styles.toolbar}>
               <div className={styles.navlinks}>
                 <Link to="/" className={styles.link}>
@@ -70,6 +71,7 @@ class Navbar extends Component {
       } else {
         return (
           <AppBar position="static">
+            <CssBaseline />
             <Toolbar className={styles.toolbar}>
               <div className={styles.navlinks}>
                 <Link to="/" className={styles.link}>
