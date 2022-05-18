@@ -94,7 +94,7 @@ class Cart extends Component {
                 <div className={styles.item}>
                   <h2> Total: £{this.state.total}.00</h2> 
                 </div>
-                <CheckoutButton loggedIn={this.state.loggedIn}/>
+                <CheckoutButton />
               </Grid>
             </Grid>
           </div>

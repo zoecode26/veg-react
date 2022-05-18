@@ -23,19 +23,17 @@ class CheckoutButton extends Component {
     // }
 
     render() {
-        if (this.state.loaded) {
-            return (
-                <div>
-                    <Button className={styles.button}
-                        variant="contained"
-                        onClick={() => ""}>
-                        <Link to={"/payment"} className={styles.buttonText}>
-                            Checkout
-                        </Link>
-                    </Button> 
-                </div>
-            )
-        }
+        return (
+            <div>
+                <Button className={styles.button}
+                    variant="contained"
+                    onClick={() => ""}>
+                    <Link to={"/payment"} className={styles.buttonText}>
+                        Checkout
+                    </Link>
+                </Button> 
+            </div>
+        )
         return null;
     }
 }
