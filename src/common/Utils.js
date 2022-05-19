@@ -1,4 +1,4 @@
-export const getCookie = (cname) => {
+const getCookie = (cname) => {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -13,3 +13,5 @@ export const getCookie = (cname) => {
     }
     return "";
 }
+
+export default getCookie;
