@@ -4,6 +4,8 @@ import Aux from 'react-aux';
 import styles from './OrdersPage.module.css';
 import { Grid } from '@mui/material';
 import axios from "axios";
+import getCookie from '../common/Utils'
+import instance from '../common/AxiosConfig'
  
 class OrdersPage extends Component {
   state = {
@@ -11,40 +13,20 @@ class OrdersPage extends Component {
     loaded: false
   }
 
-  getCookie = (cname) => {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
   async componentDidMount() {
-    let email = this.getCookie("email");
+    let email = getCookie("email");
+    let jwt = getCookie("jwt-token")
     const userDetails = {email: email};
-    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails, {
-      headers: {
-          Authorization: "Bearer " + this.getCookie("jwt-token")
-      }
-      })
+    instance.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .catch(error => {
         if (error.response.status === 403) {
           window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";
         }
       })
       .then(response => {
-        console.log(response.data)
         axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data, {
           headers: {
-              Authorization: "Bearer " + this.getCookie("jwt-token")
+              Authorization: "Bearer " + jwt
           }
           })
           .catch(error => {
@@ -64,7 +46,6 @@ class OrdersPage extends Component {
   render() {
     let orders = null
     if (this.state.loaded) {
-      console.log(this.state.orders)
       orders = this.state.orders.map(order => {
         return <Order 
           id={order.id}

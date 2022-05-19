@@ -1,0 +1,6 @@
+import getCookie from './Utils'
+
+const instance = axios.create();
+instance.defaults.headers.common['Authorization'] = "Bearer " + getCookie("jwt-token");
+
+export default instance;

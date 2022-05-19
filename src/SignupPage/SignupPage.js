@@ -34,9 +34,7 @@ class SignupPage extends Component {
             email: this.state.email, 
             password: this.state.password 
         };
-        axios.post('https://dry-forest-94057.herokuapp.com/signup', userDetails)
-        .then(response => "")
-        .catch(error => console.log(error));
+        axios.post('https://dry-forest-94057.herokuapp.com/signup', userDetails);
     } 
 
     setFirstName = (e) => {

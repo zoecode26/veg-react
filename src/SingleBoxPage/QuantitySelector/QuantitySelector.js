@@ -9,10 +9,8 @@ class QuantitySelector extends Component {
         };
         return (
             <FormControl size="small" className={styles.dropdown} renderValue={"hello"}>
-                <InputLabel id="demo-simple-select-label"> Quantity</InputLabel>
+                <InputLabel> Quantity</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
                     onChange={handleChange}
                     defaultValue= {1} 
                     label="Quantity">

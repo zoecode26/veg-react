@@ -17,29 +17,13 @@ class Navbar extends Component {
     loaded: false,
   }
 
-  // getCookie = (cname) => {
-  //   let name = cname + "=";
-  //   let decodedCookie = decodeURIComponent(document.cookie);
-  //   let ca = decodedCookie.split(';');
-  //   for(let i = 0; i <ca.length; i++) {
-  //     let c = ca[i];
-  //     while (c.charAt(0) == ' ') {
-  //       c = c.substring(1);
-  //     }
-  //     if (c.indexOf(name) == 0) {
-  //       return c.substring(name.length, c.length);
-  //     }
-  //   }
-  //   return "";
-  // }
-
   async componentDidMount() {
     let email = getCookie("email");
     if (email != "") {
       this.setState({
         signedIn: true, 
         authPath: "/signout",
-        authText: "Signout"
+        authText: "Sign Out"
       });
     }
     this.setState({
