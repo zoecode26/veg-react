@@ -2,15 +2,33 @@ import React, { Component } from "react";
 import { ElementsConsumer, CardElement } from "@stripe/react-stripe-js";
 import { Grid } from "@mui/material";
 import styles from "./CheckoutForm.module.css"
-import axios from "axios";
+import getCookie from '../common/Utils'
+import instance from '../common/AxiosConfig'
 
 class CheckoutForm extends Component {
   state = {
     imgPath: "",
-    loaded: false,
+    userId: null,
+    imgPathLoaded: false,
+    userIdLoaded: false,
   }
 
   async componentDidMount() {
+    let email = getCookie("email");
+    const userDetails = {email: email};
+    instance.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
+      .catch(error => {
+        if (error.response.status === 403) {
+          window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
+        }
+      })
+      .then(response => {
+        this.setState({
+          userId: response.data, 
+          userIdLoaded: true
+        });
+      })
+
     let idToFetch = 1
     for(let key in sessionStorage) {
       var intKey = parseInt(key)
@@ -19,12 +37,11 @@ class CheckoutForm extends Component {
         break;
       }
     }
-    const response = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + intKey);
+    const response = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + idToFetch);
     const body = await response.json();
-    console.log(body.imagePath)
     this.setState({
       imgPath: body.imagePath, 
-      loaded: true
+      imgPathLoaded: true
     });
     
   }
@@ -38,59 +55,32 @@ class CheckoutForm extends Component {
     }
 
     const card = elements.getElement(CardElement);
-    console.log(card);
     const result = await stripe.createToken(card);
 
-    if (result.error) {
-        console.log(result.error.message);
-    } else {
-        console.log(result.token);
-    }
-
     const transactionDetails = {amount: sessionStorage.getItem("total"), email: "", stripeToken: result.token.id, description: "VeggieBox transaction", currency: "GBP"}
-    axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
-            .then(response => this.writeOrder())
-            .catch(error => console.log(error));
+    instance.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
+      .then(() => this.writeOrder())
   };
 
-  getCookie = (cname) => {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
   writeOrder = () => {
-    let email = this.getCookie("email");
-    const userDetails = {email: email};
-    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
-      .then(response => {
-        console.log(this.state.imgPath)
-        const orderInfo = {price: sessionStorage.getItem("total"), webUserId: response.data, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
-        axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo, { withCredentials: true })
-          .then(response => {
-            for(let key in sessionStorage) {
-              var intKey = parseInt(key)
-              if (Number.isInteger(intKey)) {
-                const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
-                axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails, { withCredentials: true })
-                  .then(resonse => {sessionStorage.clear();
-                      window.location.href = "https://react-veg.herokuapp.com/orders";})
-                  .catch(error => console.log(error));
-              }
-            }
-          })
+    const orderInfo = {price: sessionStorage.getItem("total"), webUserId: this.state.userId, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
+    instance.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo)
+      .catch(error => {
+        if (error.response.status === 403) {
+          window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
+        }
       })
-      .catch(error => console.log(error));
+      .then(response => {
+        for(let key in sessionStorage) {
+          var intKey = parseInt(key)
+          if (Number.isInteger(intKey)) {
+            const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
+            instance.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails)
+              .then(() => {sessionStorage.clear();
+                  window.location.href = "https://react-veg.herokuapp.com/orders";});
+          }
+        }
+      })
   }
 
   render() {

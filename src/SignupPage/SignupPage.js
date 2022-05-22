@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 import styles from './SignupPage.module.css';
 import { Grid } from "@mui/material";
 import { TextField } from "@mui/material";
-import axios from 'axios';
-
+import instance from '../common/AxiosConfig'
 
 class SignupPage extends Component {
     state = {
@@ -34,9 +33,7 @@ class SignupPage extends Component {
             email: this.state.email, 
             password: this.state.password 
         };
-        axios.post('https://dry-forest-94057.herokuapp.com/signup', userDetails)
-        .then(response => "")
-        .catch(error => console.log(error));
+        instance.post('https://dry-forest-94057.herokuapp.com/signup', userDetails);
     } 
 
     setFirstName = (e) => {

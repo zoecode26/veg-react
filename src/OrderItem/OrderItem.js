@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from './OrderItem.module.css';
 import { Grid } from '@mui/material';
-import axios from "axios";
+import instance from '../common/AxiosConfig'
 
 class OrderItem extends Component {
     state = {
@@ -10,7 +10,7 @@ class OrderItem extends Component {
     }
 
     async componentDidMount() {
-        axios.get('https://dry-forest-94057.herokuapp.com/boxes/'+ this.props.boxId)
+        instance.get('https://dry-forest-94057.herokuapp.com/boxes/'+ this.props.boxId)
         .then(response => {
             this.setState({
                 boxData: response.data, 
@@ -21,13 +21,12 @@ class OrderItem extends Component {
 
     render() {
         if (this.state.loaded) {
-            console.log(this.state.boxData)
             return (
                 <Grid item xs={12} lg={8}>
                     <div className={styles.item}>
                         <Grid container>
                         <Grid item xs={6} sm={6} md={3} className={styles.gridItem}>
-                            <img className={styles.img} src={this.state.boxData.imagePath} />
+                            <img className={styles.img} alt="Vegetable box" src={this.state.boxData.imagePath} />
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} className={styles.gridItem}>
                             <h3>{this.state.boxData.boxName}</h3>

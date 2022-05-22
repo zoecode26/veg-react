@@ -5,14 +5,12 @@ import CartHeader from "../CartHeader/CartHeader";
 import { Grid } from "@material-ui/core";
 import styles from './CartPage.module.css';
 import CheckoutButton from "../CheckoutButton/CheckoutButton";
-import axios from "axios"; 
 
 class Cart extends Component {
   state = {
     cartItems: [],
     loaded: false,
     total: 0,
-    loggedIn: false,
   }
 
   handleTotalUpdate = (newTotal) => {
@@ -20,34 +18,7 @@ class Cart extends Component {
     this.forceUpdate();
   } 
 
-  getCookie = (cname) => {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-  }
-
   async componentDidMount() {
-    let email = this.getCookie("email");
-    console.log("EMAIL: " + email);
-    if (email != "") {
-      this.setState({
-        loggedIn: true, 
-      });
-    }
-    this.setState({
-      loaded: true,
-    })
-
     var cartItems = []
     var total = 0
     for(let key in sessionStorage) {
@@ -59,7 +30,6 @@ class Cart extends Component {
         total += body.price * sessionStorage.getItem(intKey)
       }
     }
-
     sessionStorage.setItem("total", total);
 
     this.setState({
@@ -94,7 +64,7 @@ class Cart extends Component {
                 <div className={styles.item}>
                   <h2> Total: £{this.state.total}.00</h2> 
                 </div>
-                <CheckoutButton loggedIn={this.state.loggedIn}/>
+                <CheckoutButton />
               </Grid>
             </Grid>
           </div>

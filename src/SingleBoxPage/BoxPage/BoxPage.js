@@ -62,9 +62,7 @@ class BoxPage extends Component {
         </div>
       );
     }
-    return(
-      null
-    );
+    return null;
   }
   
 }

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import styles from './AddToCartButton.module.css';
-import { Link } from "@material-ui/core";
 
 class AddToCartButton extends Component { 
     state = {
@@ -11,7 +10,7 @@ class AddToCartButton extends Component {
     }
 
     async componentDidMount() {
-        var enabled = sessionStorage.getItem(this.props.boxId) != 5
+        var enabled = sessionStorage.getItem(this.props.boxId) !== 5
         this.setState({
             enabled: enabled,
             loaded: true
@@ -19,24 +18,21 @@ class AddToCartButton extends Component {
     }
     
     addToSession = () => {
-        console.log("GETTING TO ADD TO SESSION")
         var boxId = this.props.boxId
         var currentQuantity = parseInt(sessionStorage.getItem(boxId))
         var newQuantity = parseInt(sessionStorage.getItem("quantity"))
-        console.log("current: " + currentQuantity)
-        console.log("new: " + newQuantity)
 
         if (currentQuantity == null || isNaN(currentQuantity)) {
             currentQuantity = 0
         }
 
         if (currentQuantity + newQuantity < 5) {
-            console.log("INSIDE IF")
             sessionStorage.setItem(boxId, currentQuantity + newQuantity)
         } else {
             sessionStorage.setItem(boxId, 5)
-            console.log("INSIDE ELSE")
-            this.state.enabled = false
+            this.setState({ 
+                enabled: false
+            });
         }
         sessionStorage.setItem("quantity", 1)
         this.forceUpdate();
@@ -58,8 +54,7 @@ class AddToCartButton extends Component {
                 return (
                     <Button disabled className={styles.disabledButton}
                         variant="contained"
-                        onClick={this.addToSession}
-                        sx={{ color: 'white'}}>
+                        onClick={this.addToSession}>
                         Max of 5 already in cart
                     </Button> 
                 ); 
