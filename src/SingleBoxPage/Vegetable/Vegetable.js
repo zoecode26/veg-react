@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from './Vegetable.module.css';
 import { Grid } from '@mui/material';
-import instance from '../common/AxiosConfig'
+import instance from '../../common/AxiosConfig'
 
 class Vegetable extends Component { 
     state = {
