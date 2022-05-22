@@ -3,7 +3,7 @@ import OrderItem from "../OrderItem/OrderItem";
 import Aux from 'react-aux';
 import styles from './OrderPage.module.css';
 import { Grid } from '@mui/material';
-import axios from "axios";
+import instance from '../common/AxiosConfig'
  
 class OrderPage extends Component {
   state = {
@@ -14,7 +14,7 @@ class OrderPage extends Component {
   }
 
   async componentDidMount() {
-    axios.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id)
+    instance.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id)
         .catch(error => {
             if (error.response.status === 403) {
               window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders/" + this.props.id;
@@ -26,7 +26,7 @@ class OrderPage extends Component {
             }) 
         })
 
-        axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id)
+        instance.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id)
         .catch(error => {
             if (error.response.status === 403) {
               window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders/" + this.props.id;

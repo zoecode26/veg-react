@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import styles from './Vegetable.module.css';
 import { Grid } from '@mui/material';
-import axios from "axios";
-
+import instance from '../common/AxiosConfig'
 
 class Vegetable extends Component { 
     state = {
@@ -11,7 +10,7 @@ class Vegetable extends Component {
     } 
 
     async componentDidMount() {
-        axios.get('https://dry-forest-94057.herokuapp.com/vegetables/' + this.props.id)
+        instance.get('https://dry-forest-94057.herokuapp.com/vegetables/' + this.props.id)
           .then(response => {
             this.setState({
                 vegetable: response.data, 

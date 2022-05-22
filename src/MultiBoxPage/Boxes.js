@@ -3,7 +3,7 @@ import Box from "../SingleBoxPage/Box/Box";
 import Aux from 'react-aux';
 import styles from './Boxes.module.css';
 import { Grid } from '@mui/material';
-import axios from "axios";
+import instance from '../common/AxiosConfig'
  
 class Boxes extends Component {
   state = {
@@ -12,7 +12,7 @@ class Boxes extends Component {
   }
 
   async componentDidMount() {
-    axios.get('https://dry-forest-94057.herokuapp.com/boxes')
+    instance.get('https://dry-forest-94057.herokuapp.com/boxes')
       .then(response => {
         this.setState({
           boxes: response.data, 

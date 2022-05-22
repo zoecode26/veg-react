@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Order from "../Orders/Order";
 import Aux from 'react-aux';
 import { Grid } from '@mui/material';
-import axios from "axios";
 import getCookie from '../common/Utils'
 import instance from '../common/AxiosConfig'
  
@@ -22,7 +21,7 @@ class OrdersPage extends Component {
         }
       })
       .then(response => {
-        axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data)
+        instance.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data)
           .catch(error => {
             if (error.response.status === 403) {
               window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";

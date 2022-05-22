@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import { ElementsConsumer, CardElement } from "@stripe/react-stripe-js";
 import { Grid } from "@mui/material";
 import styles from "./CheckoutForm.module.css"
-import axios from "axios";
 import getCookie from '../common/Utils'
-
+import instance from '../common/AxiosConfig'
 
 class CheckoutForm extends Component {
   state = {
@@ -16,14 +15,11 @@ class CheckoutForm extends Component {
 
   async componentDidMount() {
     let email = getCookie("email");
-    console.log("COOKIE")
-    console.log(email)
     const userDetails = {email: email};
-    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
+    instance.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .catch(error => {
         if (error.response.status === 403) {
-          console.log(error);
-          // window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
+          window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
         }
       })
       .then(response => {
@@ -62,13 +58,13 @@ class CheckoutForm extends Component {
     const result = await stripe.createToken(card);
 
     const transactionDetails = {amount: sessionStorage.getItem("total"), email: "", stripeToken: result.token.id, description: "VeggieBox transaction", currency: "GBP"}
-    axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
+    instance.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
       .then(() => this.writeOrder())
   };
 
   writeOrder = () => {
     const orderInfo = {price: sessionStorage.getItem("total"), webUserId: this.state.userId, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
-    axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo)
+    instance.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo)
       .catch(error => {
         if (error.response.status === 403) {
           window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
@@ -79,7 +75,7 @@ class CheckoutForm extends Component {
           var intKey = parseInt(key)
           if (Number.isInteger(intKey)) {
             const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
-            axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails)
+            instance.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails)
               .then(() => {sessionStorage.clear();
                   window.location.href = "https://react-veg.herokuapp.com/orders";});
           }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import styles from './OrderItem.module.css';
 import { Grid } from '@mui/material';
-import axios from "axios";
+import instance from '../common/AxiosConfig'
 
 class OrderItem extends Component {
     state = {
@@ -10,7 +10,7 @@ class OrderItem extends Component {
     }
 
     async componentDidMount() {
-        axios.get('https://dry-forest-94057.herokuapp.com/boxes/'+ this.props.boxId)
+        instance.get('https://dry-forest-94057.herokuapp.com/boxes/'+ this.props.boxId)
         .then(response => {
             this.setState({
                 boxData: response.data, 
