@@ -10,22 +10,14 @@ class CheckoutForm extends Component {
   state = {
     imgPath: "",
     userId: null,
-    jwt: null,
     imgPathLoaded: false,
     userIdLoaded: false,
   }
 
   async componentDidMount() {
     let email = getCookie("email");
-    this.setState({
-      jwt: getCookie("jwt-token")
-    });
     const userDetails = {email: email};
-    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails, {
-      headers: {
-          Authorization: "Bearer " + this.state.jwt
-      }
-      })
+    axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .catch(error => {
         if (error.response.status === 403) {
           window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
@@ -46,7 +38,7 @@ class CheckoutForm extends Component {
         break;
       }
     }
-    const response = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + intKey);
+    const response = await fetch('https://dry-forest-94057.herokuapp.com/boxes/' + idToFetch);
     const body = await response.json();
     this.setState({
       imgPath: body.imagePath, 
@@ -67,21 +59,13 @@ class CheckoutForm extends Component {
     const result = await stripe.createToken(card);
 
     const transactionDetails = {amount: sessionStorage.getItem("total"), email: "", stripeToken: result.token.id, description: "VeggieBox transaction", currency: "GBP"}
-    axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails, {
-      headers: {
-          Authorization: "Bearer " + this.state.jwt
-      }
-      })
+    axios.post('https://dry-forest-94057.herokuapp.com/charge', transactionDetails)
       .then(() => this.writeOrder())
   };
 
   writeOrder = () => {
     const orderInfo = {price: sessionStorage.getItem("total"), webUserId: this.state.userId, orderDate: new Date().toISOString().slice(0, 10), imgPath: this.state.imgPath}
-    axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo, {
-      headers: {
-          Authorization: "Bearer " + this.state.jwt
-      }
-      })
+    axios.post('https://dry-forest-94057.herokuapp.com/orders/new', orderInfo)
       .catch(error => {
         if (error.response.status === 403) {
           window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
@@ -92,12 +76,8 @@ class CheckoutForm extends Component {
           var intKey = parseInt(key)
           if (Number.isInteger(intKey)) {
             const orderDetails = {orderId: response.data, boxId: intKey, quantity: sessionStorage.getItem(key)};
-            axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails, {
-              headers: {
-                  Authorization: "Bearer " + this.getCookie("jwt-token")
-              }
-              })
-              .then(resonse => {sessionStorage.clear();
+            axios.post('https://dry-forest-94057.herokuapp.com/orders/orderitems', orderDetails)
+              .then(() => {sessionStorage.clear();
                   window.location.href = "https://react-veg.herokuapp.com/orders";});
           }
         }

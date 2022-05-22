@@ -4,7 +4,6 @@ import Aux from 'react-aux';
 import styles from './OrderPage.module.css';
 import { Grid } from '@mui/material';
 import axios from "axios";
-import getCookie from '../common/Utils'
  
 class OrderPage extends Component {
   state = {
@@ -15,12 +14,8 @@ class OrderPage extends Component {
   }
 
   async componentDidMount() {
-    let jwt = getCookie("jwt-token")
-    axios.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id, {
-        headers: {
-            Authorization: "Bearer " + jwt
-        }
-        }).catch(error => {
+    axios.get('https://dry-forest-94057.herokuapp.com/orders/items/' + this.props.id)
+        .catch(error => {
             if (error.response.status === 403) {
               window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders/" + this.props.id;
             }
@@ -31,11 +26,8 @@ class OrderPage extends Component {
             }) 
         })
 
-        axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id, {
-            headers: {
-                Authorization: "Bearer " + jwt
-            }
-        }).catch(error => {
+        axios.get('https://dry-forest-94057.herokuapp.com/orders/' + this.props.id)
+        .catch(error => {
             if (error.response.status === 403) {
               window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders/" + this.props.id;
             }

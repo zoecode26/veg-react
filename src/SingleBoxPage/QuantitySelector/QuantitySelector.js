@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import styles from './QuantitySelector.module.css';
 
 class QuantitySelector extends Component { 
     render() {
@@ -8,7 +7,7 @@ class QuantitySelector extends Component {
             sessionStorage.setItem("quantity", event.target.value);
         };
         return (
-            <FormControl size="small" className={styles.dropdown} renderValue={"hello"}>
+            <FormControl size="small" sx={{width: '45%'}} renderValue={"hello"}>
                 <InputLabel> Quantity</InputLabel>
                 <Select
                     onChange={handleChange}

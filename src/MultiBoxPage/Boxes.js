@@ -14,7 +14,6 @@ class Boxes extends Component {
   async componentDidMount() {
     axios.get('https://dry-forest-94057.herokuapp.com/boxes')
       .then(response => {
-        console.log(response.data)
         this.setState({
           boxes: response.data, 
           loaded: true
@@ -25,7 +24,6 @@ class Boxes extends Component {
   render() {
     let boxes = null
     if (this.state.loaded) {
-      console.log(typeof this.state.boxes)
       boxes = this.state.boxes.map(box => {
         return <Box 
           id={box.id}

@@ -21,13 +21,12 @@ class OrderItem extends Component {
 
     render() {
         if (this.state.loaded) {
-            console.log(this.state.boxData)
             return (
                 <Grid item xs={12} lg={8}>
                     <div className={styles.item}>
                         <Grid container>
                         <Grid item xs={6} sm={6} md={3} className={styles.gridItem}>
-                            <img className={styles.img} src={this.state.boxData.imagePath} />
+                            <img className={styles.img} alt="Vegetable box" src={this.state.boxData.imagePath} />
                         </Grid>
                         <Grid item xs={6} sm={6} md={3} className={styles.gridItem}>
                             <h3>{this.state.boxData.boxName}</h3>

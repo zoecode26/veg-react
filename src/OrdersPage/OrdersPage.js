@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Order from "../Orders/Order";
 import Aux from 'react-aux';
-import styles from './OrdersPage.module.css';
 import { Grid } from '@mui/material';
 import axios from "axios";
 import getCookie from '../common/Utils'
@@ -15,7 +14,6 @@ class OrdersPage extends Component {
 
   async componentDidMount() {
     let email = getCookie("email");
-    let jwt = getCookie("jwt-token")
     const userDetails = {email: email};
     instance.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .catch(error => {
@@ -24,11 +22,7 @@ class OrdersPage extends Component {
         }
       })
       .then(response => {
-        axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data, {
-          headers: {
-              Authorization: "Bearer " + jwt
-          }
-          })
+        axios.get('https://dry-forest-94057.herokuapp.com/orders/users/' + response.data)
           .catch(error => {
             if (error.response.status === 403) {
               window.location.href = "https://react-veg.herokuapp.com/login?retUrl=orders";
@@ -57,8 +51,8 @@ class OrdersPage extends Component {
     }
     return(
       <Aux>
-        <div className={styles.outerPage}>
-          <div className = {styles.page}>
+        <div sx={{padding: '2%'}}>
+          <div>
             <Grid container alignItems="center"
             justifyContent="center" spacing={{ xs: 2, md: 3 }}>
               <Grid item xs={12} md={10}>
