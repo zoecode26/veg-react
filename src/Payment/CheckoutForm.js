@@ -22,6 +22,7 @@ class CheckoutForm extends Component {
     axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .catch(error => {
         if (error.response.status === 403) {
+          console.log(error);
           window.location.href = "https://react-veg.herokuapp.com/login?retUrl=payment";
         }
       })
