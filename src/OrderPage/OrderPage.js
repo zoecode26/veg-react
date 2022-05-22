@@ -58,7 +58,7 @@ class OrderPage extends Component {
                             <Grid item xs={12} lg={8} className={styles.headerDiv}>
                                 <div className={styles.orderHeading}>
                                     <h1> Order {this.props.id} </h1>
-                                    <h3> {this.state.orderDetails.orderDate} </h3>
+                                    <h3> {new Date(this.state.orderDetails.orderDate).toLocaleDateString()} </h3>
                                 </div>
                             </Grid>
                         </Grid>
