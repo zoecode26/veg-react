@@ -16,6 +16,8 @@ class CheckoutForm extends Component {
 
   async componentDidMount() {
     let email = getCookie("email");
+    console.log("COOKIE")
+    console.log(email)
     const userDetails = {email: email};
     axios.post('https://dry-forest-94057.herokuapp.com/userid', userDetails)
       .catch(error => {
